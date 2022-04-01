@@ -43,4 +43,28 @@ describe("Unit", async function () {
       );
     }
   });
+
+  it("Set land price with function setPriceWithPublic", async function () {
+    const start = 0;
+    const len = start + 100;
+    for (let i = start; i < len; i++) {
+      await config.accounts.owner.Comparison.setPriceWithPublic(i);
+
+      process.stdout.write(
+        "calling: " + Number.parseFloat((i / len) * 100).toFixed(0) + "%\r"
+      );
+    }
+  });
+
+  it("Set land price with function setPriceWithExternal", async function () {
+    const start = 0;
+    const len = start + 100;
+    for (let i = start; i < len; i++) {
+      await config.accounts.owner.Comparison.setPriceWithExternal(i);
+
+      process.stdout.write(
+        "calling: " + Number.parseFloat((i / len) * 100).toFixed(0) + "%\r"
+      );
+    }
+  });
 });
