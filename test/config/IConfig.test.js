@@ -9,27 +9,23 @@ module.exports = {
     owner: {
       signMessage: null,
       address: null,
-      MyToken20: null,
-      Airdrop: null,
+      Comparison: null,
     },
     alice: {
       signMessage: null,
       address: null,
-      MyToken20: null,
-      Airdrop: null,
+      Comparison: null,
     },
     bob: {
       signMessage: null,
       address: null,
-      MyToken20: null,
-      Airdrop: null,
+      Comparison: null,
     },
     eve: {
       signMessage: null,
       address: null,
-      MyToken20: null,
-      Airdrop: null,
+      Comparison: null,
     },
   },
-  contracts: { MyToken20: null, Airdrop: null },
+  contracts: { Comparison: null },
 };

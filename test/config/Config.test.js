@@ -5,13 +5,9 @@ const setting = async function () {
 
   const contracts = {};
 
-  const MyToken20 = await hre.ethers.getContractFactory("MyToken20");
-  contracts.MyToken20 = await MyToken20.deploy();
-  await contracts.MyToken20.deployed();
-
-  const Airdrop = await hre.ethers.getContractFactory("Airdrop");
-  contracts.Airdrop = await Airdrop.deploy(contracts.MyToken20.address);
-  await contracts.Airdrop.deployed();
+  const Comparison = await hre.ethers.getContractFactory("Comparison");
+  contracts.Comparison = await Comparison.deploy();
+  await contracts.Comparison.deployed();
 
   const [owner, alice, bob, eve] = await hre.ethers.getSigners();
 
@@ -73,18 +69,10 @@ const setting = async function () {
     return signMsg(address, eve.address);
   };
 
-  const mapExecutorToMyToken20 = async (executor) => {
+  const mapExecutorToComparison = async (executor) => {
     return new hre.ethers.Contract(
-      contracts.MyToken20.address,
-      contracts.MyToken20.interface,
-      executor
-    );
-  };
-
-  const mapExecutorToAirdrop = async (executor) => {
-    return new hre.ethers.Contract(
-      contracts.Airdrop.address,
-      contracts.Airdrop.interface,
+      contracts.Comparison.address,
+      contracts.Comparison.interface,
       executor
     );
   };
@@ -92,36 +80,23 @@ const setting = async function () {
   const accounts = {
     owner: {
       ...owner,
-      MyToken20: await mapExecutorToMyToken20(owner),
-      Airdrop: await mapExecutorToAirdrop(owner),
+      Comparison: await mapExecutorToComparison(owner),
     },
     alice: {
       ...alice,
-      MyToken20: await mapExecutorToMyToken20(alice),
-      Airdrop: await mapExecutorToAirdrop(alice),
+      Comparison: await mapExecutorToComparison(alice),
     },
     bob: {
       ...bob,
-      MyToken20: await mapExecutorToMyToken20(bob),
-      Airdrop: await mapExecutorToAirdrop(bob),
+      Comparison: await mapExecutorToComparison(bob),
     },
     eve: {
       ...eve,
-      MyToken20: await mapExecutorToMyToken20(eve),
-      Airdrop: await mapExecutorToAirdrop(eve),
+      Comparison: await mapExecutorToComparison(eve),
     },
   };
 
-  const symbol = "MT20";
-  const name = "My Token 20";
-  const totalSupply = 10000000;
-  const decimals = 18;
-
   return {
-    symbol,
-    name,
-    totalSupply,
-    decimals,
     hre,
     expect,
     accounts,
