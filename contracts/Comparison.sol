@@ -48,8 +48,15 @@ contract Comparison is Pausable, Ownable {
         _unpause();
     }
 
-    /// @dev Use for setting the price of land per unit.
-    function setPrice(uint256 _price) external onlyOwner {
+    /// @dev Use for setting the price of land per unit. (public)
+    function setPriceWithPublic(uint256 _price) public onlyOwner {
+        require(price != _price, "Comparison: Price is already set");
+        emit PriceChanged(msg.sender, price, _price);
+        price = _price;
+    }
+
+    /// @dev Use for setting the price of land per unit. (external)
+    function setPriceWithExternal(uint256 _price) external onlyOwner {
         require(price != _price, "Comparison: Price is already set");
         emit PriceChanged(msg.sender, price, _price);
         price = _price;
