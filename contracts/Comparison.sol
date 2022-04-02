@@ -79,7 +79,7 @@ contract Comparison is Pausable, Ownable {
         return _area * price;
     }
 
-    /// @dev Use for comparison rectangle area. (public)
+    /// @dev Use for adding land. (public)
     /// @param _x Wdth of land. (meter)
     /// @param _y Length of land. (meter)
     /// @param _salt Salt for random id.
@@ -97,7 +97,7 @@ contract Comparison is Pausable, Ownable {
         emit LandAdded(msg.sender, id);
     }
 
-    /// @dev Use for comparison rectangle area. (external)
+    /// @dev Use for adding land. (external)
     /// @param _x Wdth of land. (meter)
     /// @param _y Length of land. (meter)
     /// @param _salt Salt for random id.
