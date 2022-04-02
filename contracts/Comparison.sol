@@ -46,6 +46,7 @@ contract Comparison is Pausable, Ownable {
     }
 
     /// @dev Use for setting the price of land per unit. (public)
+    /// @param _price Price per unit. (USD)
     function setPriceWithPublic(uint256 _price) public onlyOwner {
         require(price != _price, "Comparison: Price is already set");
         emit PriceChanged(msg.sender, price, _price);
@@ -53,6 +54,7 @@ contract Comparison is Pausable, Ownable {
     }
 
     /// @dev Use for setting the price of land per unit. (external)
+    /// @param _price Price per unit. (USD)
     function setPriceWithExternal(uint256 _price) external onlyOwner {
         require(price != _price, "Comparison: Price is already set");
         emit PriceChanged(msg.sender, price, _price);
