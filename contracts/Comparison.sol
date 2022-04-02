@@ -35,9 +35,6 @@ contract Comparison is Pausable, Ownable {
     /// @dev Price per unit. (USD)
     uint256 public price = 100; 
 
-    /// @dev Decimal of number.
-    uint256 public decimal = 100; 
-
     /// @dev Use for pause state.
     function pause() external onlyOwner {
         _pause();
@@ -63,16 +60,16 @@ contract Comparison is Pausable, Ownable {
     }
 
     /// @dev Use for calculating the land area. (public)
-    /// @param _x Rectangle width. (meter)
-    /// @param _y Rectangle length. (meter)
-    function calculateWithPublic(uint256 _x, uint256 _y) public pure returns(uint256) {
+    /// @param _x Wdth of land. (meter)
+    /// @param _y Length of land. (meter)
+    function calculateAreaWithPublic(uint256 _x, uint256 _y) public pure returns(uint256) {
         return _x * _y;
     }
 
     /// @dev Use for calculating the land area. (external)
-    /// @param _x Rectangle width. (meter)
-    /// @param _y Rectangle length. (meter)
-    function calculateWithExternal(uint256 _x, uint256 _y) external pure returns(uint256) {
+    /// @param _x Wdth of land. (meter)
+    /// @param _y Length of land. (meter)
+    function calculateAreaWithExternal(uint256 _x, uint256 _y) external pure returns(uint256) {
         return _x * _y;
     }
 
@@ -83,11 +80,11 @@ contract Comparison is Pausable, Ownable {
     }
 
     /// @dev Use for comparison rectangle area. (public)
-    /// @param _x Rectangle width. (meter)
-    /// @param _y Rectangle length. (meter)
+    /// @param _x Wdth of land. (meter)
+    /// @param _y Length of land. (meter)
     /// @param _salt Salt for random id.
     function addLandWithPublic(uint256 _x, uint256 _y, uint256 _salt) external onlyOwner {
-        uint256 area = calculateWithPublic(_x, _y);
+        uint256 area = calculateAreaWithPublic(_x, _y);
         uint256 id = uint256(keccak256(abi.encodePacked(block.number, msg.sender, _salt)));
         land[msg.sender] = Land({
             id: id,
@@ -101,11 +98,11 @@ contract Comparison is Pausable, Ownable {
     }
 
     /// @dev Use for comparison rectangle area. (external)
-    /// @param _x Rectangle width. (meter)
-    /// @param _y Rectangle length. (meter)
+    /// @param _x Wdth of land. (meter)
+    /// @param _y Length of land. (meter)
     /// @param _salt Salt for random id.
     function addLandWithExternal(uint256 _x, uint256 _y, uint256 _salt) external onlyOwner {
-        uint256 area = this.calculateWithExternal(_x, _y);
+        uint256 area = this.calculateAreaWithExternal(_x, _y);
         uint256 id = uint256(keccak256(abi.encodePacked(block.number, msg.sender, _salt)));
         land[msg.sender] = Land({
             id: id,
